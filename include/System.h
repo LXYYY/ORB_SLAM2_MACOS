@@ -72,6 +72,11 @@ public:
     // Returns the camera pose (empty if tracking fails).
     cv::Mat TrackRGBD(const cv::Mat &im, const cv::Mat &depthmap, const double &timestamp);
 
+    // Runs the viewer and enters the main event loop. This method should hence only be called once the main processing
+    // has started in a separate thread. For maximum portability, this method should only be called from the main
+    // thread.
+    void RunViewer();
+    
     // Proccess the given monocular frame
     // Input images: RGB (CV_8UC3) or grayscale (CV_8U). RGB is converted to grayscale.
     // Returns the camera pose (empty if tracking fails).
@@ -158,7 +163,7 @@ private:
     // The Tracking thread "lives" in the main execution thread that creates the System object.
     std::thread* mptLocalMapping;
     std::thread* mptLoopClosing;
-    std::thread* mptViewer;
+    //std::thread* mptViewer;
 
     // Reset flag
     std::mutex mMutexReset;

@@ -37,6 +37,9 @@
 
 #include<mutex>
 
+//#include <unistd.h>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -1509,7 +1512,9 @@ void Tracking::Reset()
     {
         mpViewer->RequestStop();
         while(!mpViewer->isStopped())
-            usleep(3000);
+//            usleep(3000);
+            std::this_thread::sleep_for(std::chrono::microseconds(3000));
+
     }
 
     // Reset Local Mapping
